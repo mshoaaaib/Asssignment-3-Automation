@@ -1,13 +1,15 @@
-package first;
+package proj;
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
@@ -93,7 +95,7 @@ public class  Assignment3{
 	Thread.sleep(2000);
 	driver.switchTo().alert().accept();
   }
-  */
+  
 	
 	@Test
 	public void step_4() throws InterruptedException
@@ -102,6 +104,7 @@ public class  Assignment3{
 		driver.get("https://omayo.blogspot.in/");
 		String handler=driver.getWindowHandle();
 		Thread.sleep(3000);
+		
 		
 		driver.findElement(By.xpath("//select[@id='multiselect1'] //option [@value='Hyundaix']")).click();
 		
@@ -138,5 +141,98 @@ public class  Assignment3{
 		driver.switchTo().window(p);
 		
 		driver.findElement(By.xpath("//button[@onclick='setTimeout(myFunctionABC,3000)']")).click();
+		
+		Actions act = new Actions(driver);
+		WebElement doubleclick=driver.findElement(By.xpath("//button[@ondblclick='dblclickAlert()']"));
+		
+		act.doubleClick(doubleclick).perform();
+		
+		driver.switchTo().alert().accept();
+		driver.findElement(By.xpath("//button[@onclick='setTimeout(myFunctionAXD,10000)']")).click();
+		Thread.sleep(10000);
+		
+		driver.findElement(By.id("dte")).click();
+		
+	}
+	*/
+	@Test
+	public void step_5() throws InterruptedException {
+		
+		WebDriver driver= new ChromeDriver();
+		driver.get("https://omayo.blogspot.in/");
+
+		Thread.sleep(3000);
+		
+		driver.findElement(By.id("radio1")).click();
+		
+		driver.findElement(By.id("alert1")).click();
+		driver.switchTo().alert().accept();
+		
+		
+		WebElement color_orange= driver.findElement(By.id("checkbox1"));
+		WebElement color_blue= driver.findElement(By.id("checkbox2"));
+		
+		boolean OrangeisSelected=color_orange.isSelected();
+		boolean BlueisSelected=color_blue.isSelected();
+		
+		if(OrangeisSelected==true)
+		{
+			color_orange.click();
+		}
+		
+		if(BlueisSelected==false)
+		{
+			color_blue.click();
+		}
+		System.out.println(driver.findElement(By.id("rotb")).getAttribute("value"));
+		
+		driver.findElement(By.xpath("//input[@id='prompt']")).click();
+		Alert alert=driver.switchTo().alert();
+		alert.sendKeys("shoaaaib");
+		Thread.sleep(3000);
+		alert.accept();
+		
+		driver.findElement(By.id("confirm")).click();
+		Thread.sleep(3000);
+		driver.switchTo().alert().accept();
+		
+		driver.findElement(By.xpath("//div[ @id='HTML24']//input")).sendKeys("Hello! Accessed");
+		driver.findElement(By.xpath("//div[ @id='HTML28']//input")).sendKeys("Heelo! Accessed");
+		
+		driver.findElement(By.xpath("//input[@value='Car']")).click();
+		
+		//Select bag and book and deselect the book.
+		WebElement book= driver.findElement(By.xpath("//input[@value='Book']"));
+		WebElement bag=driver.findElement(By.xpath("//input[@value='Bag']"));
+		
+		
+		boolean bookisSelected=book.isSelected();	//checking if these check boxes are selected
+		boolean bagisSelected=bag.isSelected();
+		
+		
+		if(bookisSelected==false)
+		{
+			book.click();
+		}
+		
+		if(bagisSelected==false)
+		{
+			bag.click();
+		}
+		
+		Thread.sleep(3000);
+		//again deselecting the book
+		
+		if(bookisSelected==true)
+		{
+			book.click();
+		}
+		
+		//Select socialmedia=new Select(driver.findElement(By.xpath("//div[@class='dropdown']")));
+		//socialmedia.selectByVisibleText("Facebook");
+		driver.findElement(By.xpath("//div[@class='dropdown']")).click();
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//a[@href='http://facebook.com']")).click();
+		Thread.sleep(3000);
 	}
   }
