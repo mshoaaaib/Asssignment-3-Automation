@@ -1,29 +1,142 @@
-package project;
+package first;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.Test;
 
-public class project {
-	
-	public static void main(String[]args) throws InterruptedException
-	{
-		WebDriver driver= new ChromeDriver();
+public class  Assignment3{
+	/*
+  @Test
+  public void f() throws InterruptedException {
+  
+	WebDriver driver= new ChromeDriver();
+	driver.get("https://omayo.blogspot.in/");
+	Thread.sleep(3000);
+		
+	driver.findElement(By.xpath("//textarea[@rows='10' and @cols='80']")).sendKeys("Muhammad Shoaib");
+		
+	WebElement update= driver.findElement(By.xpath("//textarea[@rows='10' and @cols='30']"));
+	update.clear();
+	update.sendKeys("Hi! I am Muhammad Shoaib");
+  }
+  
+  @Test
+  public void printdata_from_table() throws InterruptedException
+  {
+	  WebDriver driver= new ChromeDriver();
 		driver.get("https://omayo.blogspot.in/");
 		Thread.sleep(3000);
-		
+			
 		driver.findElement(By.xpath("//textarea[@rows='10' and @cols='80']")).sendKeys("Muhammad Shoaib");
-		
+			
 		WebElement update= driver.findElement(By.xpath("//textarea[@rows='10' and @cols='30']"));
 		update.clear();
 		update.sendKeys("Hi! I am Muhammad Shoaib");
 		
-		List<WebElement> table;
+	
+		List<WebElement> tableRows= driver.findElements(By.xpath("//table[@id='table1']//tr"));
 		
-	}
-
+		System.out.println("Name" + "   "+"Age"+ "   " + " Place");
+		for (int j=1; j<tableRows.size(); j++ )
+		{
+			for (int i=1; i<=3; i++)
+			{
+				System.out.print(driver.findElement(By.xpath("//table[@id='table1']//tbody//tr["+j+"]//td["+i+"]")).getText());
+				System.out.print("   ");
+			}
+			System.out.println();
+		}
+		
+		driver.findElement(By.xpath("//form[@name='form1']//input[@type='text']")).sendKeys("shoaaaib");
+		driver.findElement(By.xpath("//form[@name='form1']//input[@type='password']")).sendKeys("shoaaaib");
+		driver.findElement(By.xpath("//form[@name='form1']//button[@type='button']")).click();
+		
+  
 }
+
+  @Test
+  public void filling_login_details() throws InterruptedException
+  {
+	  WebDriver driver= new ChromeDriver();
+		driver.get("https://omayo.blogspot.in/");
+		Thread.sleep(3000);
+		
+		driver.findElement(By.xpath("//form[@name='form1']//input[@type='text']")).sendKeys("shoaaaib");
+		driver.findElement(By.xpath("//form[@name='form1']//input[@type='password']")).sendKeys("shoaaaib");
+		driver.findElement(By.xpath("//form[@name='form1']//button[@type='button']")).click();
+	  
+  }
+  
+	@Test
+  public void switching_frame() throws InterruptedException
+  {
+	WebDriver driver= new ChromeDriver();
+	driver.get("https://omayo.blogspot.in/");
+	String handler=driver.getWindowHandle();
+	Thread.sleep(3000);
+	
+	driver.switchTo().frame("iframe1");
+	driver.switchTo().window(handler);
+	driver.switchTo().frame("iframe2");
+	driver.switchTo().window(handler);
+	
+	driver.findElement(By.xpath("//input[@type='text' and @name='userid']")).sendKeys("shoaaib");
+	driver.findElement(By.xpath("//input[@type='password' and @name='pswrd'] ")).sendKeys("shoaaib");
+	driver.findElement(By.xpath("//form[@name='login']//input[@type='button']")).click();
+	Thread.sleep(2000);
+	driver.switchTo().alert().accept();
+  }
+  */
+	
+	@Test
+	public void step_4() throws InterruptedException
+	{
+		WebDriver driver= new ChromeDriver();
+		driver.get("https://omayo.blogspot.in/");
+		String handler=driver.getWindowHandle();
+		Thread.sleep(3000);
+		
+		driver.findElement(By.xpath("//select[@id='multiselect1'] //option [@value='Hyundaix']")).click();
+		
+		Select doc=new Select(driver.findElement(By.id("drop1")));
+		doc.selectByVisibleText("doc 3");
+		
+		WebElement enter= driver.findElement(By.name("fname"));
+		enter.clear();
+		enter.sendKeys("hello world");
+		
+		driver.findElement(By.xpath("//button[@id='but2']")).click();
+		
+		driver.findElement(By.xpath("//button[@name='samename'][1]")).click();
+		driver.findElement(By.xpath("//button[@name='samename'][2]")).click();
+		driver.findElement(By.xpath("//button[@name='samename'][3]")).click();
+		
+		driver.findElement(By.xpath("//input[@id='alert2']")).click();
+		driver.switchTo().alert().accept();
+		
+		driver.findElement(By.xpath("//a[@href=\"JavaScript:newPopup('http://compendiumdev.co.uk/selenium/basic_web_page.html');\"]")).click();	
+		Thread.sleep(2000);
+		System.out.println(driver.getCurrentUrl());
+		
+		Set<String> windows= driver.getWindowHandles();
+		Iterator<String> it= windows.iterator();
+		String p = it.next();
+		String child= it.next();
+		driver.switchTo().window(child);
+		
+		
+		System.out.println(driver.findElement(By.id("para1")).getText());
+		System.out.println(driver.findElement(By.id("para2")).getText());
+		
+		driver.switchTo().window(p);
+		
+		driver.findElement(By.xpath("//button[@onclick='setTimeout(myFunctionABC,3000)']")).click();
+	}
+  }
