@@ -40,7 +40,7 @@ public class  Assignment3{
 			
 		WebElement update= driver.findElement(By.xpath("//textarea[@rows='10' and @cols='30']"));
 		update.clear();
-		update.sendKeys("Hi! I am Muhammad Shoaib");
+		update.sendKeys("Hi! I am Mu");
 		
 	
 		List<WebElement> tableRows= driver.findElements(By.xpath("//table[@id='table1']//tr"));
